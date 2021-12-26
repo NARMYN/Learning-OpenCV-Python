@@ -1,7 +1,12 @@
-
+#task1
 print("Enter radius of a circle")
 radius= float(input())
 
 circumference= 2*3.142*radius
 area = (3.142)* (radius**2)
 print ("the area is", area, "the circumference is ", circumference)
+#task2
+mylist=["apple", 24, "banana"]
+mystring = str(mylist[0])+str(mylist[1])+str(mylist[2])
+print(mystring)
+#task3
