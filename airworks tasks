@@ -6,7 +6,22 @@ circumference= 2*3.142*radius
 area = (3.142)* (radius**2)
 print ("the area is", area, "the circumference is ", circumference)
 #task2
-mylist=["apple", 24, "banana"]
-mystring = str(mylist[0])+str(mylist[1])+str(mylist[2])
+mylist = ["Apple", 2003, "Banana"]
+mystring= ""
+for x in mylist:
+    mystring= mystring+ str(x)
 print(mystring)
 #task3
+list_key= ["Bulley", "Andrew", "Tom", "peter"]
+list_value= [2.00, 3, "one", "spiderman"]
+fin_dict= {}
+for i in range(len(list_key)):
+    fin_dict.update({list_key[i]:list_value[i]})
+print(fin_dict)
+#task4
+print("Enter the number of layers for the triangle")
+lyr= int(input())
+n=1
+for x in range(lyr):
+    print(n*"*")
+    n = n+1
