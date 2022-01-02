@@ -25,3 +25,15 @@ n=1
 for x in range(lyr):
     print(n*"*")
     n = n+1
+#opencv task1
+import cv2 as cv
+import numpy as np
+import matplotlib.pyplot as plt
+im = cv.imread('C:/Users/Narmeen/Pictures/Camera Roll/img1.jpg')
+mytuple = im.shape
+#print(mytuple)
+for x in range(mytuple[0]):
+    for y in range(mytuple[1]):
+        img= im[x,y]
+        print(img)
+#opencv task2
