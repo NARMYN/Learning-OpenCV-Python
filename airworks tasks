@@ -63,3 +63,24 @@ capture.release()
 cv2.destroyAllWindows()
 
 #opencv task3
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+capture1 = cv2.VideoCapture(0)
+capture2 = cv2.VideoCapture(1)
+result1 = cv2.VideoWriter('video1.avi',cv2.VideoWriter_fourcc(*'MJPG'), 10,(640,480))
+result2 = cv2.VideoWriter('video2.avi',cv2.VideoWriter_fourcc(*'MJPG'), 10,(640,480))
+while capture1.isOpened() or capture2.isOpened():
+    _, frame1 = capture1.read()
+    __, frame2 = capture2.read()
+    result1.write(frame1)
+    result2.write(frame2)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+capture1.release()
+capture2.release()
+result1.release()
+result2.release()
+cv2.destroyAllWindows()
