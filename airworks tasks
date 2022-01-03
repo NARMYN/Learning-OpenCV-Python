@@ -38,3 +38,27 @@ for x in range(mytuple[0]):
         print(img)
 cv2.waitKey(0)
 #opencv task2
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+capture = cv2.VideoCapture(0)
+result = cv2.VideoWriter('video.avi',cv2.VideoWriter_fourcc(*'MJPG'), 10,(640,480))
+while capture.isOpened():
+    _, frame = capture.read()
+    mytuple = frame.shape
+
+    for x in range(mytuple[0]):
+        for y in range(mytuple[1]):
+            #pixl= frame[x,y]
+            #pixl = (pixl/255)
+            frame[x,y] = (frame[x,y])/255
+    cv2.imshow('video', frame)
+    result.write(frame)
+    print(frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+capture.release()
+cv2.destroyAllWindows()
+
+#opencv task3
