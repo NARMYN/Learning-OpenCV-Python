@@ -84,3 +84,22 @@ capture2.release()
 result1.release()
 result2.release()
 cv2.destroyAllWindows()
+
+#Task2 revised:
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+capture = cv2.VideoCapture(0)
+result = cv2.VideoWriter('video.avi',cv2.VideoWriter_fourcc(*'MJPG'), 10,(640,480))
+while capture.isOpened():
+    _, frame = capture.read()
+    grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    ret, thresh = cv2.threshold(grey, 127, 255, cv2.THRESH_BINARY)
+    cv2.imshow('video', thresh)
+    result.write(thresh)
+    print(frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+result.release()
+capture.release()
+cv2.destroyAllWindows()
