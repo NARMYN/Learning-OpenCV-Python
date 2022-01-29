@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Jan 29 21:33:13 2022
+
+@author: Narmeen
+"""
+
+import cv2
+import numpy as np
+img = cv2.imread('vibgyor.jpg')
+img = cv2.resize(img, (600,300))
+hsvimg= cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+#for violet
+violetlower = np.array([123, 0, 0])
+violetmax = np.array([179, 255, 255])
+violetmask = cv2.inRange(hsvimg, violetlower, violetmax)
+violet = cv2.bitwise_and(img, img, mask = violetmask)
+#for indigo
+indigolower = np.array([117, 0, 0])
+indigomax = np.array([128, 255, 255])
+indigomask = cv2.inRange(hsvimg, indigolower, indigomax)
+indigo = cv2.bitwise_and(img, img, mask = indigomask)
+#for blue
+bluelower = np.array([100, 0, 0])
+bluemax = np.array([118, 255, 255])
+bluemask = cv2.inRange(hsvimg, bluelower, bluemax)
+blue = cv2.bitwise_and(img, img, mask = bluemask)
+#for green
+greenlower = np.array([44, 0, 0])
+greenmax = np.array([93, 255, 255])
+greenmask = cv2.inRange(hsvimg, greenlower, greenmax)
+green = cv2.bitwise_and(img, img, mask = greenmask)
+#for yellow
+yellowlower = np.array([27, 0, 0])
+yellowmax = np.array([33, 255, 255])
+yellowmask = cv2.inRange(hsvimg, yellowlower, yellowmax)
+yellow = cv2.bitwise_and(img, img, mask = yellowmask)
+#for orange
+orangelower = np.array([2, 0, 0])
+orangemax = np.array([19, 255, 255])
+orangemask = cv2.inRange(hsvimg, orangelower, orangemax)
+orange = cv2.bitwise_and(img, img, mask = orangemask)
+#for red
+redlower = np.array([0, 0, 0])
+redmax = np.array([5, 255, 255])
+redmask = cv2.inRange(hsvimg, redlower, redmax)
+red = cv2.bitwise_and(img, img, mask = redmask)
+
+cv2.imshow("violet", violet)
+cv2.imshow("indigo", indigo)
+cv2.imshow("blue", blue)
+cv2.imshow("green", green)
+cv2.imshow("yellow", yellow)
+cv2.imshow("orange", orange)
+cv2.imshow("red", red)
+cv2.waitKey(0)
