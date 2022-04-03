@@ -1,0 +1,111 @@
+Narmeen Sabah
+ME sem1
+
+TASK1 Solution:
+#!/bin/bash
+cd ~
+mkdir docs
+echo "creating text file 1";
+touch file1.txt
+chmod 777 file1.txt
+echo "creating text file 2";
+touch file2.txt
+chmod 777 file2.txt
+echo "Writing to file1:"
+echo "hello I am bulley maguire" >> file1.txt
+cat file1.txt
+echo "Writing to file2:"
+echo "Hello I am Peter Parker. There are three of my kind" >> file2.txt
+cat file2.txt
+touch temp.txt
+mv file1.txt temp.txt
+mv file2.txt file1.txt
+mv temp.txt file2.txt
+echo "file1 contains:"
+cat file1.txt
+echo "file2 contains:"
+cat file2.txt
+
+TASK2 solution:
+#!/bin/bash
+echo "Enter first number"
+read X
+echo "Enter second number"
+read Y
+if [ $X -lt $Y ]; then
+   echo " X is less than Y "
+elif [ $X -gt $Y ]; then
+   echo " X is greater than Y"
+elif [ $X -eq $Y ]; then
+   echo " X is equal to Y "
+fi
+
+//in the .bashrc script, we do:
+cd <the directory of the bash file>
+bash <nameofbashfile.sh>
+
+TASK3 Solution:
+#!/bin/bash
+echo "Updating Package database"
+sudo apt-get update
+echo "Upgrading the Packages"
+sudo apt-get upgrade
+echo "Removing unused Packages"
+sudo apt-get autoremove
+echo "Installing python 3"
+sudo apt-get install python3
+export Narmeen=13
+echo "Narmeen="; printenv Narmeen
+
+TASK4 Solution:
+#!/bin/bash
+ARG1=$1
+
+if [ $ARG1 == 'forward' ]; then
+    rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: -0.1
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0"
+
+elif [ $ARG1 == 'rotate' ]; then
+    rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.2"
+
+elif [ $ARG1 == 'stop' ]; then
+    rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0"
+elif [ $ARG1 == 'circle_clockwise' ]; then
+    rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 0.1
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: -0.2"
+elif [ $ARG1 == 'circle_counter_clockwise' ]; then
+    rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 0.1
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.2"
+fi
