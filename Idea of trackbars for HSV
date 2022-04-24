@@ -1,0 +1,43 @@
+
+import cv2
+import numpy as np
+img = cv2.imread('redgreenblue.jpg')
+img = cv2.resize(img, (600,300))
+hsvimg= cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+cv2.imshow("original", img)
+cv2.imshow("HSV image", hsvimg)
+
+#inserting trackbars to define colour's ranges wrt min max hsv values
+#create a window for trackbars
+cv2.namedWindow("Trackbars")
+#resize the window
+cv2.resizeWindow("Trackbars", 640, 240)
+#create trackbars to get min max HSV value for a particular colour
+def empty(x):
+    pass
+cv2.createTrackbar("Hue Min", "Trackbars", 0, 179, empty)
+cv2.createTrackbar("Hue Max", "Trackbars", 179, 179, empty)
+cv2.createTrackbar("Saturation Min", "Trackbars", 0, 255, empty)
+cv2.createTrackbar("Saturation Max", "Trackbars", 255, 255, empty)
+cv2.createTrackbar("Value Min", "Trackbars", 0, 255, empty)
+cv2.createTrackbar("Value Max", "Trackbars", 255, 255, empty)
+
+while True:
+    #Read the trackbar values for everytime the value changes
+    h_min =cv2.getTrackbarPos("Hue Min", "Trackbars")
+    h_max =cv2.getTrackbarPos("Hue Max", "Trackbars")
+    s_min =cv2.getTrackbarPos("Saturation Min", "Trackbars")
+    s_max =cv2.getTrackbarPos("Saturation Max", "Trackbars")
+    v_min =cv2.getTrackbarPos("Value Min", "Trackbars")
+    v_max =cv2.getTrackbarPos("Value Max", "Trackbars")
+    #Define the upper and lower hsv values for the mask
+    lower = np.array([h_min, s_min, v_min])
+    upper = np.array([h_max, s_max, v_max])
+    #define the mask
+    mask = cv2.inRange(hsvimg, lower, upper)
+    imgresult= cv2.bitwise_and(img, img, mask=mask)
+    #show the mask
+    cv2.imshow("mask", mask)
+    #show final image
+    cv2.imshow("Final Image", imgresult)
+    cv2.waitKey(1)
