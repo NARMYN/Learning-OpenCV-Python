@@ -1,0 +1,52 @@
+import cv2
+import numpy as np
+img = cv2.imread('red.jpg')
+img = cv2.resize(img, (600, 300))
+cv2.imshow("original image", img)
+hsvimg = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+#Following values are determined experimentally using trackbars
+#for Blue: (94,140,115,255,0,255)
+blue_min = np.array([94,115,0])
+blue_max = np.array([140, 255, 255])
+bluemask = cv2.inRange(hsvimg, blue_min, blue_max)
+blue = cv2.bitwise_and(img, img, mask=bluemask)
+#for red: (0,22,73,255,0,255)
+red_min = np.array([0, 73, 0])
+red_max = np.array([22,255,255])
+redmask = cv2.inRange(hsvimg, red_min, red_max)
+red = cv2.bitwise_and(img, img, mask=redmask)
+#for Green: (37,77,0,255,128,255)
+green_min = np.array([37, 0, 128])
+green_max = np.array([77, 255, 255])
+greenmask = cv2.inRange(hsvimg, green_min, green_max)
+green = cv2.bitwise_and(img, img, mask=greenmask)
+'''if np.all((blue==0)) == False:
+    print("The color is blue")
+    cv2.imshow("blue", blue)
+if np.all((red==0)) == False:
+    print("The color is red")
+    cv2.imshow("red", red)
+if np.all((green==0)) == False:
+    print("The color is green")
+    cv2.imshow("green", green)
+cv2.waitKey(0)'''
+#finding the number of zeros in each green red and blue masked image arrays
+zeros = np.array([np.count_nonzero(green==0), np.count_nonzero(blue==0), np.count_nonzero(red==0)])
+#print(zeros)
+#finding the index of lowest element ie the image having minimum number of zeros
+index = np.where(zeros == np.amin(zeros))
+#print(index[0])
+
+
+if index[0] == 0:
+    print("The color is green")
+    cv2.imshow("green", green)
+elif index[0] == 1:
+    print("The color is blue")
+    cv2.imshow("blue", blue)
+elif index[0] == 2:
+    print("The color is red")
+    cv2.imshow("red", red)
+else:
+    print("no color")
+cv2.waitKey(0)
