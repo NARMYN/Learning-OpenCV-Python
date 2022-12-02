@@ -18,7 +18,10 @@ while (len(myletters)<= no_of_letters):
     while True:
         letter = input("Enter a character \n").lower()
         try:
-            if letter in myletters:
+            if not letter.isalpha():
+                print("Invalid value. Please enter a letter")
+                continue
+            if (letter in myletters):
                 print("You entered an existing value. Please re-enter!")
                 continue
             else:
